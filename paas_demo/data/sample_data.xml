@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A small wholesaler's data: customers, products, pipeline, quotations. Restored every night with the demo. -->
+<odoo noupdate="1">
+    <!-- Customers -->
+    <record id="partner_brightline" model="res.partner">
+        <field name="name">Brightline Interiors</field>
+        <field name="is_company" eval="True"/>
+        <field name="email">hello@brightline.example</field>
+        <field name="city">Rotterdam</field>
+        <field name="country_id" ref="base.nl"/>
+    </record>
+    <record id="partner_nordhaus" model="res.partner">
+        <field name="name">Nordhaus Hotels</field>
+        <field name="is_company" eval="True"/>
+        <field name="email">purchasing@nordhaus.example</field>
+        <field name="city">Hamburg</field>
+        <field name="country_id" ref="base.de"/>
+    </record>
+    <record id="partner_atelier" model="res.partner">
+        <field name="name">Atelier Lumière</field>
+        <field name="is_company" eval="True"/>
+        <field name="email">contact@atelier-lumiere.example</field>
+        <field name="city">Lyon</field>
+        <field name="country_id" ref="base.fr"/>
+    </record>
+    <record id="partner_casa_verde" model="res.partner">
+        <field name="name">Casa Verde Offices</field>
+        <field name="is_company" eval="True"/>
+        <field name="email">info@casaverde.example</field>
+        <field name="city">Valencia</field>
+        <field name="country_id" ref="base.es"/>
+    </record>
+
+    <!-- Products -->
+    <record id="product_desk" model="product.product">
+        <field name="name">Oak Standing Desk</field>
+        <field name="default_code">DESK-OAK</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
+        <field name="list_price">649.0</field>
+        <field name="standard_price">410.0</field>
+    </record>
+    <record id="product_chair" model="product.product">
+        <field name="name">Ergonomic Chair</field>
+        <field name="default_code">CHAIR-ERGO</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
+        <field name="list_price">329.0</field>
+        <field name="standard_price">190.0</field>
+    </record>
+    <record id="product_lamp" model="product.product">
+        <field name="name">Brass Desk Lamp</field>
+        <field name="default_code">LAMP-BRASS</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
+        <field name="list_price">89.0</field>
+        <field name="standard_price">38.0</field>
+    </record>
+    <record id="product_install" model="product.product">
+        <field name="name">On-site Installation (hour)</field>
+        <field name="default_code">SRV-INSTALL</field>
+        <field name="type">service</field>
+        <field name="list_price">65.0</field>
+    </record>
+
+    <!-- Pipeline -->
+    <record id="lead_nordhaus_rooms" model="crm.lead">
+        <field name="name">Furnish 40 hotel rooms</field>
+        <field name="type">opportunity</field>
+        <field name="partner_id" ref="partner_nordhaus"/>
+        <field name="expected_revenue">38000</field>
+        <field name="probability">40</field>
+    </record>
+    <record id="lead_casa_verde_office" model="crm.lead">
+        <field name="name">New office floor, 25 workstations</field>
+        <field name="type">opportunity</field>
+        <field name="partner_id" ref="partner_casa_verde"/>
+        <field name="expected_revenue">24500</field>
+        <field name="probability">60</field>
+    </record>
+    <record id="lead_atelier_lamps" model="crm.lead">
+        <field name="name">Lamps for the new showroom</field>
+        <field name="type">opportunity</field>
+        <field name="partner_id" ref="partner_atelier"/>
+        <field name="expected_revenue">3200</field>
+        <field name="probability">20</field>
+    </record>
+
+    <!-- Quotations -->
+    <record id="quotation_brightline" model="sale.order">
+        <field name="partner_id" ref="partner_brightline"/>
+        <field name="order_line" eval="[
+            (0, 0, {'product_id': ref('product_desk'), 'product_uom_qty': 6}),
+            (0, 0, {'product_id': ref('product_chair'), 'product_uom_qty': 6}),
+            (0, 0, {'product_id': ref('product_install'), 'product_uom_qty': 4}),
+        ]"/>
+    </record>
+    <record id="quotation_atelier" model="sale.order">
+        <field name="partner_id" ref="partner_atelier"/>
+        <field name="order_line" eval="[
+            (0, 0, {'product_id': ref('product_lamp'), 'product_uom_qty': 20}),
+        ]"/>
+    </record>
+</odoo>
