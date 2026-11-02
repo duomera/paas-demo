@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- The visitors' user: a normal internal user with Sales, CRM and Inventory rights; no settings, no app installation.
+<!-- The visitors' user: a normal internal user with Sales and CRM (all documents) and Inventory rights; no settings,
+     no app installation.
      Login and password are shown publicly on the sign-in page. -->
 <odoo noupdate="1">
     <record id="demo_visitor" model="res.users">
@@ -7,7 +8,7 @@
         <field name="login">demo</field>
         <field name="password">demo</field>
         <field name="email">demo@example.com</field>
-        <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('sales_team.group_sale_salesman'), ref('stock.group_stock_user')])]"/>
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('sales_team.group_sale_salesman_all_leads'), ref('stock.group_stock_user')])]"/>
         <field name="signature">Exploring the live demo</field>
     </record>
 </odoo>

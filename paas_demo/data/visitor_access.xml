@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Run on install and on every update: the visitor sees all the sample sales data (Sales "All Documents"), and the
+     sample opportunities and quotations are theirs, so the pipeline's and quotations' default "My …" filters show
+     them. -->
+<odoo>
+    <function model="res.users" name="write">
+        <value eval="[ref('paas_demo.demo_visitor')]"/>
+        <value eval="{'groups_id': [(4, ref('sales_team.group_sale_salesman_all_leads'))]}"/>
+    </function>
+    <function model="crm.lead" name="write">
+        <value eval="[ref('paas_demo.lead_nordhaus_rooms'), ref('paas_demo.lead_casa_verde_office'), ref('paas_demo.lead_atelier_lamps')]"/>
+        <value eval="{'user_id': ref('paas_demo.demo_visitor')}"/>
+    </function>
+    <function model="sale.order" name="write">
+        <value eval="[ref('paas_demo.quotation_brightline'), ref('paas_demo.quotation_atelier')]"/>
+        <value eval="{'user_id': ref('paas_demo.demo_visitor')}"/>
+    </function>
+</odoo>
